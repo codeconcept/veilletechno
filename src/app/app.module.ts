@@ -12,6 +12,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataService } from '../providers/data/data.service';
+import { ScheduleListPage } from '../pages/schedule-list/schedule-list';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { DataService } from '../providers/data/data.service';
     AddTechnoPage,
     SchedulePage,
     HomePage,
+    ScheduleListPage,
     TabsPage
   ],
   imports: [
@@ -31,6 +33,7 @@ import { DataService } from '../providers/data/data.service';
     MyApp,
     AddTechnoPage,
     SchedulePage,
+    ScheduleListPage,
     HomePage,
     TabsPage
   ],

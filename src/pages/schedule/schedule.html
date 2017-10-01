@@ -9,12 +9,18 @@
 <ion-content>
     <ion-list>
         <ion-item>
+            <ion-label floating>nom du programme</ion-label>  
+            <ion-input [(ngModel)]="schedule.name"></ion-input>
+          </ion-item> 
+        <ion-item>
             <ion-label>Date</ion-label>
             <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="schedule.date"></ion-datetime>
           </ion-item>
         <ion-item>
           <ion-label floating>nom</ion-label>  
-          <ion-input [(ngModel)]="schedule.technology.name"></ion-input>
+          <ion-select [(ngModel)]="schedule.technology.name">
+              <ion-option *ngFor="let technology of technologies">{{technology.name}}</ion-option>
+          </ion-select>
         </ion-item>  
         <ion-item>
           <ion-label floating>catégorie</ion-label>
@@ -34,12 +40,11 @@
         </ion-item>      
         <ion-item>
             <ion-label>durée (en minutes) {{schedule.duration}} minutes</ion-label>  
-            <ion-range [(ngModel)]="schedule.duration" min="0" max="480" step="1">
+            <ion-range [(ngModel)]="schedule.duration" min="0" max="480" step="15">
                 <ion-label range-left>0</ion-label>
                 <ion-label range-right>480</ion-label>
             </ion-range>
         </ion-item>    
       </ion-list>
       <button ion-button block (click)="createSchedule()">créer</button>
-      {{ schedule | json }}   
 </ion-content>

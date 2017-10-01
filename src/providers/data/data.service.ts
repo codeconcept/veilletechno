@@ -25,7 +25,6 @@ export class DataService {
   }
 
   getAllTechnologies() {
-    console.log(this.technologies);
     return this.technologies;
   }
 
@@ -49,6 +48,10 @@ export class DataService {
   createSchedule(schedule: Schedule) {
     this.schedules = [...this.schedules, schedule];
     console.log(this.schedules);
+  }
+
+  getAllSchedules() {
+    return this.schedules;
   }
 
 }
