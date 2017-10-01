@@ -7,5 +7,18 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label floating>nom</ion-label>  
+      <ion-input [(ngModel)]="technology.name"></ion-input>
+    </ion-item>  
+    <ion-item>
+      <ion-label floating>catégorie</ion-label>
+      <ion-select [(ngModel)]="technology.category">
+        <ion-option *ngFor="let category of categories">{{category}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list> 
+  <button ion-button block (click)="addTechnology()">ajouter</button>
 
 </ion-content>

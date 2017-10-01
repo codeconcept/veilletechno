@@ -24,6 +24,7 @@ export class HomePage {
   }
 
   search(event) {
-    this.technologies = this.dataService.search(event.target.value.trim());
+    const term = event.target.value ? event.target.value.trim() : '';
+    this.technologies = this.dataService.search(term);
   }  
 }
