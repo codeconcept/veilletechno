@@ -14,7 +14,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, private loadingCtrl: LoadingController, private dataService: DataService) {
   }
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
     const loader = this.loadingCtrl.create({
       content: 'veuillez patienter'
     });
