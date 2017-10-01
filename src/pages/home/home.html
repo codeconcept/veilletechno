@@ -10,6 +10,8 @@
     Planifiez votre veille techno.
   </p>
 
+  <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
+
   <ion-list>
     <ion-item *ngFor="let techno of technologies">{{techno?.name}}</ion-item>
   </ion-list>

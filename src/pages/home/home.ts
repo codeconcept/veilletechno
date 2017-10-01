@@ -23,4 +23,7 @@ export class HomePage {
     loader.dismiss();
   }
 
+  search(event) {
+    this.technologies = this.dataService.search(event.target.value.trim());
+  }  
 }

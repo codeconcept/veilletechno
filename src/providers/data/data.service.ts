@@ -23,8 +23,8 @@ export class DataService {
     return this.technologies;
   }
 
-  searchTechnology(term) {
-    
+  search(term: string) {
+    return this.technologies.filter(tech => tech.name.toLocaleLowerCase().includes(term));
   }
 
 }
