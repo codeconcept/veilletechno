@@ -37,6 +37,7 @@ export class SchedulePage {
     this.toastCtrl.create({
       message: 'votre tâche a été créée',
       duration: 2000,
+      cssClass: 'ok'
     }).present();
     this.resetSchedule();
   }
