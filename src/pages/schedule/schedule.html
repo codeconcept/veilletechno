@@ -7,5 +7,39 @@
 </ion-header>
 
 <ion-content>
-  
+    <ion-list>
+        <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="schedule.date"></ion-datetime>
+          </ion-item>
+        <ion-item>
+          <ion-label floating>nom</ion-label>  
+          <ion-input [(ngModel)]="schedule.technology.name"></ion-input>
+        </ion-item>  
+        <ion-item>
+          <ion-label floating>catégorie</ion-label>
+          <ion-select [(ngModel)]="schedule.technology.category">
+            <ion-option *ngFor="let category of categories">{{category}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label floating>priorité</ion-label>
+            <ion-select [(ngModel)]="schedule.priority">
+              <ion-option *ngFor="let priority of priorities">{{priority}}</ion-option>
+            </ion-select>
+        </ion-item>    
+        <ion-item>
+            <ion-label floating>remarques</ion-label>  
+            <ion-textarea [(ngModel)]="schedule.remark"></ion-textarea>
+        </ion-item>      
+        <ion-item>
+            <ion-label>durée (en minutes) {{schedule.duration}} minutes</ion-label>  
+            <ion-range [(ngModel)]="schedule.duration" min="0" max="480" step="1">
+                <ion-label range-left>0</ion-label>
+                <ion-label range-right>480</ion-label>
+            </ion-range>
+        </ion-item>    
+      </ion-list>
+      <button ion-button block (click)="createSchedule()">créer</button>
+      {{ schedule | json }}   
 </ion-content>

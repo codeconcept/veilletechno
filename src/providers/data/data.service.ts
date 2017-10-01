@@ -2,20 +2,23 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Technology} from '../../models/technology';
+import { Schedule } from '../../models/schedule';
 
 @Injectable()
 export class DataService {
 
-  technologies : Technology[] = [
+  technologies: Technology[] = [
     { name: 'Angular', category: 'Front'},
     { name: 'PWA', category: 'Hybride'},
     { name: 'Ionic', category: 'Hybride'},
     { name: 'Node', category: 'Backend'}
   ];
 
+  schedules: Schedule[] = [];
+  
   categories: string[] = ['Front', 'Back', 'FullStack', 'Hybride', 'Autre'];
 
-  priorities: string[] = ['dès que possible', 'cette semaine', 'ce mois', 'ce trimestre', 'ce semestre', 'cette année', 'un jour'];  
+  priorities: string[] = ['basse', 'moyenne', 'haute'];  
 
   constructor(public http: HttpClient) {
     console.log('Hello DataProvider Provider');
@@ -41,6 +44,11 @@ export class DataService {
   addTechnology(technology: Technology) {
     this.technologies = [...this.technologies, technology];
     console.log(this.technologies);
+  }
+
+  createSchedule(schedule: Schedule) {
+    this.schedules = [...this.schedules, schedule];
+    console.log(this.schedules);
   }
 
 }
