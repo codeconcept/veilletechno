@@ -71,4 +71,12 @@ export class DataService {
     return this.db.schedules.toArray()
   }
 
+  edit(schedule: Schedule) {
+    this.db.schedules.update(schedule.id, schedule);
+  }
+
+  delete(scheduleId) {
+    this.db.schedules.delete(scheduleId);
+  }
+
 }

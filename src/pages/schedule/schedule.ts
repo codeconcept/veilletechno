@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 
 import { Schedule } from '../../models/schedule';
 import { Technology } from '../../models/technology';
@@ -24,8 +24,9 @@ export class SchedulePage {
   categories: string[];
   priorities: string[];
 
+  isInEditMode = false;
 
-  constructor(public navCtrl: NavController, private dataService: DataService, private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, private navParams: NavParams, private dataService: DataService, private toastCtrl: ToastController) {
 
   }
 
@@ -33,17 +34,31 @@ export class SchedulePage {
     this.dataService.getAllTechnologies().then(data => this.technologies = data);
     this.categories = this.dataService.getAllCategories(); 
     this.priorities = this.dataService.getAllPriorities();
+    if(this.navParams.get('schedule')) {
+      this.isInEditMode =  true;
+      this.schedule = this.navParams.get('schedule');
+    }
   }
 
   createSchedule() {
-    this.dataService.createSchedule(this.schedule);
-    this.toastCtrl.create({
-      message: 'votre tâche a été créée',
-      position: 'middle',
-      duration: 1000,
-      cssClass: 'ok'
-    }).present();
-    this.resetSchedule();
+    if(!this.isInEditMode) {
+      this.dataService.createSchedule(this.schedule);
+      this.toastCtrl.create({
+        message: 'votre tâche a été créée',
+        position: 'middle',
+        duration: 1000,
+        cssClass: 'ok'
+      }).present();
+      this.resetSchedule();
+    } else {
+      this.dataService.edit(this.schedule);
+      this.toastCtrl.create({
+        message: 'votre tâche a été modifiée',
+        position: 'middle',
+        duration: 1000,
+        cssClass: 'okEdit'
+      }).present();
+    }
   }
 
   resetSchedule() {

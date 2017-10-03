@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Détails de {{schedule.name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>    
+    <ion-card-header>
+      <b>{{schedule.name}} (durée : {{schedule.duration}} min)</b>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <div>{{schedule.remark}}</div>
+      <div>{{schedule.date}}</div>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="edit(schedule)"><ion-icon name="md-create"></ion-icon></button>
+        <button ion-button (click)="delete(schedule)" color="danger"><ion-icon name="trash"></ion-icon></button>
+      </ion-buttons>
+      </ion-card-content>
+    
+    </ion-card>
+</ion-content>
