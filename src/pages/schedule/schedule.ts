@@ -45,7 +45,7 @@ export class SchedulePage {
       this.dataService.createSchedule(this.schedule);
       this.toastCtrl.create({
         message: 'votre tâche a été créée',
-        position: 'middle',
+        position: 'bottom',
         duration: 1000,
         cssClass: 'ok'
       }).present();
@@ -54,7 +54,7 @@ export class SchedulePage {
       this.dataService.edit(this.schedule);
       this.toastCtrl.create({
         message: 'votre tâche a été modifiée',
-        position: 'middle',
+        position: 'bottom',
         duration: 1000,
         cssClass: 'okEdit'
       }).present();

@@ -46,5 +46,6 @@
             </ion-range>
         </ion-item>    
       </ion-list>
-      <button ion-button block (click)="createSchedule()">créer</button>
+      <button ion-button block (click)="createSchedule()" *ngIf="!isInEditMode">créer</button>
+      <button ion-button block (click)="createSchedule()"*ngIf="isInEditMode" color="warning">modifier</button>
 </ion-content>
