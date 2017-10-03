@@ -7,16 +7,17 @@ import { Schedule } from '../../models/schedule';
 import Dexie from 'dexie';
 
 @Injectable()
-export class DataService extends Dexie {
+export class DataService {
 
-  schedules: Dexie.Table<Schedule, number>;
+  db;
+  // schedules: Dexie.Table<Schedule, number>;
 
-  technologies: Technology[] = [
-    { name: 'Angular', category: 'Front'},
-    { name: 'PWA', category: 'Hybride'},
-    { name: 'Ionic', category: 'Hybride'},
-    { name: 'Node', category: 'Backend'}
-  ];
+  // technologies: Technology[] = [
+  //   { name: 'Angular', category: 'Front'},
+  //   { name: 'PWA', category: 'Hybride'},
+  //   { name: 'Ionic', category: 'Hybride'},
+  //   { name: 'Node', category: 'Backend'}
+  // ];
 
   // schedules: Schedule[] = [];
   
@@ -25,14 +26,15 @@ export class DataService extends Dexie {
   priorities: string[] = ['basse', 'moyenne', 'haute'];  
 
   constructor(public http: HttpClient) {
-    super('ScheduleDatabase');
-    this.version(1).stores({
-      schedules: '++id, name'
-    })
+    this.db = new Dexie('veilletechno');
+    this.db.version(1).stores({
+      schedules: '++id, name',
+      technologies: '++id'
+    });
   }
 
-  getAllTechnologies() {
-    return this.technologies;
+  getAllTechnologies(): Dexie.Promise<Technology[]> {
+    return this.db.technologies.toArray();
   }
 
   getAllCategories() {
@@ -43,23 +45,30 @@ export class DataService extends Dexie {
     return this.priorities;
   }
 
-  search(term: string) {
-    return this.technologies.filter(tech => tech.name.toLocaleLowerCase().includes(term));
+  search(term: string):  Dexie.Promise<Technology[]> {
+    return this.db.technologies
+      .toArray()
+      .then(data => {
+        // console.log(data);
+        return data.filter(tech => this.nameIncludesTerm(tech, term));
+      });
+  }
+
+  nameIncludesTerm(technology, term) {
+    console.log(technology, term.toLocaleLowerCase(), technology.name.toLocaleLowerCase());
+    return technology.name.toLocaleLowerCase().includes(term.toLocaleLowerCase());
   }
 
   addTechnology(technology: Technology) {
-    this.technologies = [...this.technologies, technology];
-    console.log(this.technologies);
+    this.db.technologies.add(technology);
   }
 
   createSchedule(schedule: Schedule) {
-    // this.schedules = [...this.schedules, schedule];
-    this.schedules.add(schedule);
+    this.db.schedules.add(schedule);
   }
 
   getAllSchedules(): Dexie.Promise<Schedule[]> {
-    // return this.schedules;
-    return this.schedules.toArray()
+    return this.db.schedules.toArray()
   }
 
 }

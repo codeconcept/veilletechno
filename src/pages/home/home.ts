@@ -19,12 +19,14 @@ export class HomePage {
       content: 'veuillez patienter'
     });
     loader.present();
-    this.technologies = this.dataService.getAllTechnologies();
+    this.dataService.getAllTechnologies().then(data => this.technologies = data);
     loader.dismiss();
   }
 
   search(event) {
     const term = event.target.value ? event.target.value.trim() : '';
-    this.technologies = this.dataService.search(term);
+    this.dataService
+      .search(term)
+      .then(data => this.technologies = data);
   }  
 }

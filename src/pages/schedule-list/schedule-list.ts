@@ -14,7 +14,6 @@ export class ScheduleListPage {
   }
 
   ionViewWillEnter() {
-    console.log('will enter');
     this.dataService.getAllSchedules()
       .then(data => this.schedules = data);
   }

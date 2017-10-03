@@ -17,13 +17,13 @@
             <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="schedule.date"></ion-datetime>
           </ion-item>
         <ion-item>
-          <ion-label floating>nom</ion-label>  
+          <ion-label floating>nom de la technologie</ion-label>  
           <ion-select [(ngModel)]="schedule.technology.name">
               <ion-option *ngFor="let technology of technologies">{{technology.name}}</ion-option>
           </ion-select>
         </ion-item>  
         <ion-item>
-          <ion-label floating>catégorie</ion-label>
+          <ion-label floating>catégorie de la technologie</ion-label>
           <ion-select [(ngModel)]="schedule.technology.category">
             <ion-option *ngFor="let category of categories">{{category}}</ion-option>
           </ion-select>
