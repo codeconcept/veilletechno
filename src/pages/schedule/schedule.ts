@@ -30,8 +30,8 @@ export class SchedulePage {
   }
 
   ionViewWillLoad() {
-    this.technologies = this.dataService.getAllTechnologies(); console.log('techno', this.technologies);
-    this.categories = this.dataService.getAllCategories(); console.log('categ', this.categories);
+    this.technologies = this.dataService.getAllTechnologies(); 
+    this.categories = this.dataService.getAllCategories(); 
     this.priorities = this.dataService.getAllPriorities();
   }
 

@@ -4,8 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { Technology} from '../../models/technology';
 import { Schedule } from '../../models/schedule';
 
+import Dexie from 'dexie';
+
 @Injectable()
-export class DataService {
+export class DataService extends Dexie {
+
+  schedules: Dexie.Table<Schedule, number>;
 
   technologies: Technology[] = [
     { name: 'Angular', category: 'Front'},
@@ -14,14 +18,17 @@ export class DataService {
     { name: 'Node', category: 'Backend'}
   ];
 
-  schedules: Schedule[] = [];
+  // schedules: Schedule[] = [];
   
   categories: string[] = ['Front', 'Back', 'FullStack', 'Hybride', 'Autre'];
 
   priorities: string[] = ['basse', 'moyenne', 'haute'];  
 
   constructor(public http: HttpClient) {
-    console.log('Hello DataProvider Provider');
+    super('ScheduleDatabase');
+    this.version(1).stores({
+      schedules: '++id, name'
+    })
   }
 
   getAllTechnologies() {
@@ -46,12 +53,13 @@ export class DataService {
   }
 
   createSchedule(schedule: Schedule) {
-    this.schedules = [...this.schedules, schedule];
-    console.log(this.schedules);
+    // this.schedules = [...this.schedules, schedule];
+    this.schedules.add(schedule);
   }
 
-  getAllSchedules() {
-    return this.schedules;
+  getAllSchedules(): Dexie.Promise<Schedule[]> {
+    // return this.schedules;
+    return this.schedules.toArray()
   }
 
 }
